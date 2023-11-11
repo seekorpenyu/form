@@ -1,8 +1,8 @@
 <?php
 
-$dbhost = "localhost";
-$dbuser = "root";
-$dbpass = "";
+$dbhost = "01mysql.mysql.database.azure.com";
+$dbuser = "isdpg6";
+$dbpass = "Aididghani.01";
 $dbname = "isdp_sensors";
 
 if (!$conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname)) {
