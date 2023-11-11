@@ -1,0 +1,51 @@
+/* Reset some default styles for body and buttons */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('bg.jpg');
+    /* Replace with the path to your background image */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: top right, top left;
+    /* Position the image at the top right and top left corners */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    margin: 5px 0;
+}
+
+input {
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 10px;
+}
+
+/* Background container for the wallpaper */
+.container {
+    background-color: rgb(40, 133, 158);
+    /* Add a background color to the Bootstrap container to make it visible */
+    border-radius: 5px 5px 5px 5px;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin: 20px 0;
+}
+
+/* Header styles */
+.header {
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #32b9b4;
+    color: #fff;
+    border-radius: 5px 5px 5px 5px;
+}
