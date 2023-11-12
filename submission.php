@@ -7,7 +7,7 @@ $dbname = getenv("DB_NAME"); // Set in Azure Web App Configuration
 
 mysqli_ssl_set($conn, NULL, NULL, NULL, NULL, NULL);
 
-if (!$conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname, 3306, NULL, MYSQLI_CLIENT_SSL)) {
+if (!$conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname, 3000, NULL, MYSQLI_CLIENT_SSL)) {
     die("failed to connect!");
 }
 
