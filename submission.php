@@ -1,7 +1,7 @@
 <?php
 
 $dbhost = "01mysql.mysql.database.azure.com";
-$dbuser = "isdpg6@01mysql";
+$dbuser = "isdpg6";
 $dbpass = "Aididghani.01";
 $dbname = "isdp_sensors";
 
