@@ -5,13 +5,8 @@ $dbuser = getenv("DB_USER"); // Set in Azure Web App Configuration
 $dbpass = getenv("DB_PASS"); // Set in Azure Web App Configuration
 $dbname = getenv("DB_NAME"); // Set in Azure Web App Configuration
 
-if (!$conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname, 3306, null)) {
-    die("failed to connect!");
-}
-
-// Set SSL options
-$conn->set_option(MYSQLI_OPT_SSL_VERIFY_SERVER_CERT, true);
-$conn->ssl_set(null, null, "/var/www/html/BaltimoreCyberTrustRoot.crt.pem", null, null);
+$conn = mysqli_init();
+mysqli_ssl_set($conn, NULL, NULL, NULL, NULL, NULL);
 
 // Initialize a variable to hold the message
 $message = "";
@@ -24,16 +19,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Insert data into MySQL table
     $sql = "INSERT INTO user (name, age) VALUES ('$name', '$age')";
 
-    if ($conn->query($sql) === TRUE) {
-        // Data inserted successfully, redirect back to index.html
-        $message = "Your form has been submitted!";
+    if ($conn->real_connect($dbhost, $dbuser, $dbpass, $dbname, 3306, NULL, MYSQLI_CLIENT_SSL)) {
+        if ($conn->query($sql) === TRUE) {
+            // Data inserted successfully, redirect back to index.html
+            $message = "Your form has been submitted!";
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+        // Close connection
+        $conn->close();
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        die('Failed to connect to MySQL: ' . $conn->connect_error);
     }
 }
-
-// Close connection
-$conn->close();
 ?>
 
 <!DOCTYPE html>
