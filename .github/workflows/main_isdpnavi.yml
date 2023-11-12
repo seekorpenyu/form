@@ -54,4 +54,4 @@ jobs:
           app-name: 'isdpnavi'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_6ABD0493EA844B6F998E9A682D8ADF79 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B8382C01DE4144808491C257F6A2CCF6 }}
