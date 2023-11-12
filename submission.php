@@ -5,9 +5,13 @@ $dbuser = "isdpg6";
 $dbpass = "Aididghani.01";
 $dbname = "isdp_sensors";
 
-if (!$conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname)) {
+if (!$conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname, 3306, null)) {
     die("failed to connect!");
 }
+
+// Set SSL options
+$conn->set_option(MYSQLI_OPT_SSL_VERIFY_SERVER_CERT, true);
+$conn->ssl_set(null, null, "DigiCertGlobalRootG2.crt.pem", null, null);
 
 // Initialize a variable to hold the message
 $message = "";
