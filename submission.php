@@ -6,7 +6,7 @@ $dbpass = getenv("DB_PASS"); // Set in Azure Web App Configuration
 $dbname = getenv("DB_NAME"); // Set in Azure Web App Configuration
 
 $conn = mysqli_init();
-mysqli_ssl_set($conn, NULL, NULL, NULL, NULL, NULL);
+mysqli_ssl_set($conn, NULL, NULL, "/home/site/wwwroot/ssl/DigiCertGlobalRootCA.crt.pem", NULL, NULL);
 
 // Initialize a variable to hold the message
 $message = "";
