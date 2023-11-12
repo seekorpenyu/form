@@ -5,33 +5,33 @@ $dbuser = getenv("DB_USER"); // Set in Azure Web App Configuration
 $dbpass = getenv("DB_PASS"); // Set in Azure Web App Configuration
 $dbname = getenv("DB_NAME"); // Set in Azure Web App Configuration
 
-$conn = mysqli_init();
 mysqli_ssl_set($conn, NULL, NULL, "C:\Users\maidi\Downloads\BaltimoreCyberTrustRoot.crt.pem", NULL, NULL);
+
+if (!$conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname, 3306, NULL, MYSQLI_CLIENT_SSL)) {
+    die("failed to connect!");
+}
 
 // Initialize a variable to hold the message
 $message = "";
 
 // Process form data
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = mysqli_real_escape_string($conn, $_POST["name"]);
-    $age = mysqli_real_escape_string($conn, $_POST["age"]);
+    $name = $_POST["name"];
+    $age = $_POST["age"];
 
     // Insert data into MySQL table
     $sql = "INSERT INTO user (name, age) VALUES ('$name', '$age')";
 
-    if ($conn->real_connect($dbhost, $dbuser, $dbpass, $dbname, 3306, NULL, MYSQLI_CLIENT_SSL)) {
-        if ($conn->query($sql) === TRUE) {
-            // Data inserted successfully, redirect back to index.html
-            $message = "Your form has been submitted!";
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
-        // Close connection
-        $conn->close();
+    if ($conn->query($sql) === TRUE) {
+        // Data inserted successfully, redirect back to index.html
+        $message = "Your form has been submitted!";
     } else {
-        die('Failed to connect to MySQL: ' . $conn->connect_error);
+        echo "Error: " . $sql . "<br>" . $conn->error;
     }
 }
+
+// Close connection
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -55,6 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <?php echo $message; ?>
                 </p>
                 <button type="resubmit">Resubmit</button>
+
             </form>
         </div>
     </div>
@@ -62,3 +63,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </body>
 
 </html>
+
