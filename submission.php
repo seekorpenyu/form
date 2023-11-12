@@ -1,9 +1,9 @@
 <?php
 
-$dbhost = "01mysql.mysql.database.azure.com";
-$dbuser = "isdpg6";
-$dbpass = "Aididghani.01";
-$dbname = "isdp_sensors";
+$dbhost = getenv("DB_HOST"); // Set in Azure Web App Configuration
+$dbuser = getenv("DB_USER"); // Set in Azure Web App Configuration
+$dbpass = getenv("DB_PASS"); // Set in Azure Web App Configuration
+$dbname = getenv("DB_NAME"); // Set in Azure Web App Configuration
 
 if (!$conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname, 3306, null)) {
     die("failed to connect!");
@@ -18,8 +18,8 @@ $message = "";
 
 // Process form data
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = $_POST["name"];
-    $age = $_POST["age"];
+    $name = mysqli_real_escape_string($conn, $_POST["name"]);
+    $age = mysqli_real_escape_string($conn, $_POST["age"]);
 
     // Insert data into MySQL table
     $sql = "INSERT INTO user (name, age) VALUES ('$name', '$age')";
@@ -57,7 +57,6 @@ $conn->close();
                     <?php echo $message; ?>
                 </p>
                 <button type="resubmit">Resubmit</button>
-
             </form>
         </div>
     </div>
