@@ -5,7 +5,7 @@ $dbuser = getenv("DB_USER"); // Set in Azure Web App Configuration
 $dbpass = getenv("DB_PASS"); // Set in Azure Web App Configuration
 $dbname = getenv("DB_NAME"); // Set in Azure Web App Configuration
 
-mysqli_ssl_set($conn, NULL, NULL, "C:\Users\maidi\Downloads\BaltimoreCyberTrustRoot.crt.pem", NULL, NULL);
+mysqli_ssl_set($conn, NULL, NULL, NULL, NULL, NULL);
 
 if (!$conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname, 3306, NULL, MYSQLI_CLIENT_SSL)) {
     die("failed to connect!");
