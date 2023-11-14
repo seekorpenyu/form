@@ -50,7 +50,7 @@ $conn->close();
     <div class="container">
         <h1>Data Entry Form</h1><br>
         <div class="header">
-            <form action="index.html" method="post">
+            <form action="index.php" method="post">
                 <p class="message">
                     <?php echo $message; ?>
                 </p>
